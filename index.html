@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101828" />
+  <title>AI RPS — Batu Gunting Kertas</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">✦</div>
+        <div>
+          <p class="eyebrow">TENSORFLOW.JS + TEACHABLE MACHINE</p>
+          <h1>AI RPS</h1>
+        </div>
+      </div>
+      <div class="status-pill" id="modelStatus">Model belum dimuat</div>
+    </header>
+
+    <section class="intro">
+      <div>
+        <p class="eyebrow">MINI WEB GAME</p>
+        <h2>Batu, Gunting, Kertas<br /><span>lawan AI lewat kamera.</span></h2>
+        <p class="intro-copy">
+          Tunjukkan tanganmu ke kamera. Model Teachable Machine membaca gerakanmu,
+          lalu komputer memilih langkah secara acak.
+        </p>
+      </div>
+      <div class="scoreboard">
+        <div class="score-box">
+          <span>KAMU</span>
+          <strong id="playerScore">0</strong>
+        </div>
+        <div class="score-divider">:</div>
+        <div class="score-box">
+          <span>AI</span>
+          <strong id="aiScore">0</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="setup-card panel">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">01 · MODEL</p>
+          <h3>Masukkan URL model</h3>
+        </div>
+        <span class="mini-badge">PUBLIC MODEL</span>
+      </div>
+      <div class="model-row">
+        <input
+          id="modelUrl"
+          type="url"
+          autocomplete="off"
+          placeholder="https://teachablemachine.withgoogle.com/models/XXXXXX/"
+          aria-label="URL model Teachable Machine"
+        />
+        <button class="button primary" id="loadModelBtn">Muat Model</button>
+      </div>
+      <p class="hint">
+        Gunakan model Image dengan 3 kelas yang dinamai <b>Batu</b>, <b>Gunting</b>, dan <b>Kertas</b>.
+      </p>
+    </section>
+
+    <section class="game-grid">
+      <div class="panel camera-panel">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">02 · KAMERA</p>
+            <h3>Gerakanmu</h3>
+          </div>
+          <span class="live-dot" id="cameraState">OFFLINE</span>
+        </div>
+
+        <div class="camera-frame" id="cameraFrame">
+          <div id="webcam-container" class="webcam-container">
+            <div class="camera-placeholder">
+              <div class="camera-icon">◉</div>
+              <strong>Kamera belum aktif</strong>
+              <span>Muat model lalu mulai kamera.</span>
+            </div>
+          </div>
+          <div class="camera-overlay"></div>
+          <div class="confidence-chip" id="confidenceChip">—</div>
+        </div>
+
+        <div class="detection-row">
+          <div>
+            <span class="muted-label">TERDETEKSI</span>
+            <strong id="liveGesture">—</strong>
+          </div>
+          <button class="button secondary" id="cameraBtn" disabled>Mulai Kamera</button>
+        </div>
+
+        <div class="probabilities" id="probabilities"></div>
+      </div>
+
+      <div class="panel arena-panel">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">03 · MATCH</p>
+            <h3>Siap duel?</h3>
+          </div>
+          <button class="text-button" id="resetBtn">Reset skor</button>
+        </div>
+
+        <div class="battle">
+          <div class="choice-card player-card" id="playerCard">
+            <span class="choice-side">KAMU</span>
+            <div class="choice-icon" id="playerIcon">?</div>
+            <strong id="playerMove">Belum main</strong>
+          </div>
+
+          <div class="vs-badge" id="vsBadge">VS</div>
+
+          <div class="choice-card ai-card" id="aiCard">
+            <span class="choice-side">AI</span>
+            <div class="choice-icon" id="aiIcon">?</div>
+            <strong id="aiMove">Menunggu</strong>
+          </div>
+        </div>
+
+        <div class="result-box" id="resultBox">
+          <span class="result-kicker">HASIL</span>
+          <strong id="resultText">Muat model untuk mulai.</strong>
+          <small id="resultDetail">Tekan “Mulai Kamera”, lalu “Main Sekarang”.</small>
+        </div>
+
+        <div class="countdown" id="countdown" aria-live="polite"></div>
+        <button class="button play-button" id="playBtn" disabled>Main Sekarang</button>
+      </div>
+    </section>
+
+    <footer class="footer-note">
+      <span>Prediksi diproses di browser.</span>
+      <span>•</span>
+      <span>© AI RPS</span>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.5/dist/teachablemachine-image.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
