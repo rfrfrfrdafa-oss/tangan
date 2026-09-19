@@ -1,3 +1,5 @@
+#http://127.0.0.1:5500/
+
 # AI RPS — Batu, Gunting, Kertas
 
 Game web sederhana yang memakai **Teachable Machine Image + TensorFlow.js** untuk mengenali gerakan tangan dari webcam, lalu bermain Batu–Gunting–Kertas melawan pilihan AI acak.
