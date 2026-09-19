@@ -6,6 +6,8 @@ Game web sederhana yang memakai **Teachable Machine Image + TensorFlow.js** untu
 
 link model:
 https://teachablemachine.withgoogle.com/models/MhjafiE0H/
+link advenced model:
+https://teachablemachine.withgoogle.com/models/oeA8O6Guh/
 
 ## Struktur
 
